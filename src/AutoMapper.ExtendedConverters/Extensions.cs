@@ -6,8 +6,7 @@ namespace AutoMapper.ExtendedConverters
     public static class Extensions
     {
         public static void UsingCompiledConverter<TSrc, TDest>(
-            this IMappingExpression<TSrc, TDest> mapping,
-            bool shouldMapFields = false)
+            this IMappingExpression<TSrc, TDest> mapping)
             where TSrc : class
             where TDest : class, new()
         {
