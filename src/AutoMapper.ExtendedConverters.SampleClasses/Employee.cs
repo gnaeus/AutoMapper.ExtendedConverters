@@ -3,24 +3,26 @@ using System.Collections.Generic;
 
 namespace AutoMapper.ExtendedConverters.SampleClasses
 {
-    public class Customer : Person
+    public class Employee : Person
     {
-        public DateTime RegistrationDate { get; set; }
-        public List<Address> Addresses { get; set; }
+        public Guid DepartmentId { get; set; }
+        public Department Department { get; set; }
+        public string Position { get; set; }
+        public Address Address { get; set; }
         public List<Order> Orders { get; set; }
 
         #region Samples
 
-        public static Customer Create()
+        public static Employee Create()
         {
-            return new Customer {
+            return new Employee {
                 Id = Guid.NewGuid(),
                 FirstName = Samples.RandomWord(),
                 LastName = Samples.RandomWord(),
                 Email = Samples.RandomPhrase(2),
                 Phones = Samples.RandomStringList(3, 12, digits: true),
-                Addresses = Samples.RandomList(2, Address.Create),
-                RegistrationDate = DateTime.Now,
+                Address = Address.Create(),
+                Position = Samples.RandomPhrase(4),
             };
         }
 
