@@ -12,7 +12,7 @@ namespace AutoMapper.ExtendedConverters.Tests
         {
             var config = new MapperConfiguration(cfg => {
 
-                cfg.CreateMap<Customer, Customer>().UsingCompiledConverter(true);
+                cfg.CreateMap<Customer, Customer>().UsingCompiledConverter();
 
                 cfg.CreateMap<List<Customer>, List<Customer>>()
                     .UsingListConverter(s => s.Id, d => d.Id);

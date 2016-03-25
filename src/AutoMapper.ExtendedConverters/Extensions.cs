@@ -11,7 +11,7 @@ namespace AutoMapper.ExtendedConverters
             where TSrc : class
             where TDest : class, new()
         {
-            mapping.ConvertUsing(new CompiledConverter<TSrc, TDest>(shouldMapFields));
+            mapping.ConvertUsing(new CompiledConverter<TSrc, TDest>());
         }
 
         public static void UsingListConverter<TSrc, TDest, TKey>(
