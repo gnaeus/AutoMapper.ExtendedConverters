@@ -39,6 +39,9 @@ namespace AutoMapper.ExtendedConverters.Tests
                 cfg.CreateMap<IEnumerable<Model>, LinkedList<Entity>>()
                     .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
             });
+
+            config.AssertConfigurationIsValid();
+
             Mapper = config.CreateMapper();
         }
 

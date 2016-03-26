@@ -29,6 +29,9 @@ namespace AutoMapper.ExtendedConverters.Tests
                 cfg.CreateMap<List<Model>, List<Entity>>()
                     .UsingListConverter(m => m.Id, e => e.Id);
             });
+
+            config.AssertConfigurationIsValid();
+
             Mapper = config.CreateMapper();
         }
 

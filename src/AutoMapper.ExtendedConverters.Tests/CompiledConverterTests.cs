@@ -46,6 +46,9 @@ namespace AutoMapper.ExtendedConverters.Tests
 
                 cfg.CreateMap<First, Second>().UsingCompiledConverter();
             });
+
+            config.AssertConfigurationIsValid();
+
             Mapper = config.CreateMapper();
         }
 
