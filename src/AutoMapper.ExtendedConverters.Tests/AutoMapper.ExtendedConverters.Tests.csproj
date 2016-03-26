@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CompiledConverterTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="CollectionConverterTests.cs" />
     <Compile Include="ListConverterTests.cs" />

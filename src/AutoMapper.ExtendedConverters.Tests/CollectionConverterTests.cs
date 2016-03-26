@@ -35,6 +35,9 @@ namespace AutoMapper.ExtendedConverters.Tests
 
                 cfg.CreateMap<Model[], SortedSet<Entity>>()
                     .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
+
+                cfg.CreateMap<IEnumerable<Model>, LinkedList<Entity>>()
+                    .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
             });
             Mapper = config.CreateMapper();
         }
@@ -133,14 +136,6 @@ namespace AutoMapper.ExtendedConverters.Tests
         [TestMethod]
         public void ShouldMapAnyIEnumerable_ToAnyICollection()
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Model, Entity>();
-
-                cfg.CreateMap<IEnumerable<Model>, LinkedList<Entity>>()
-                    .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
-            });
-            IMapper mapper = config.CreateMapper();
-
             ICollection<Entity> dest = new LinkedList<Entity>(new[] {
                 new Entity { Id = 1, Text = "a" },
                 new Entity { Id = 2, Text = "b" },
@@ -150,7 +145,7 @@ namespace AutoMapper.ExtendedConverters.Tests
             var destArray = new Entity[3];
             dest.CopyTo(destArray, 0);
 
-            ICollection<Entity> res = mapper.Map(BuildSource(), dest);
+            ICollection<Entity> res = Mapper.Map(BuildSource(), dest);
 
             var resArray = new Entity[4];
             res.CopyTo(resArray, 0);
