@@ -8,7 +8,7 @@ namespace AutoMapper.ExtendedConverters.Tests
     public class ExtensionsTests
     {
         [TestMethod]
-        public void TestConfigurationExtensions()
+        public void ShouldProduceValidConfiguration()
         {
             var config = new MapperConfiguration(cfg => {
 
