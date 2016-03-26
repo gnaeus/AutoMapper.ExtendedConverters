@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Order
     {
@@ -25,10 +25,12 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             return new Order {
                 Id = Guid.NewGuid(),
-                Amount = Samples.Random.Next(10),
+                Amount = SampleBuilder.Random.Next(10),
                 CreationDate = DateTime.Now.Date,
-                IsShipped = Samples.Random.Next(2) == 1,
-                ShippingDate = Samples.Random.Next(2) == 1 ? DateTime.Now.Date.AddDays(1) : (DateTime?)null,
+                IsShipped = (SampleBuilder.Random.Next(2) == 1),
+                ShippingDate = (SampleBuilder.Random.Next(2) == 1)
+                    ? DateTime.Now.Date.AddDays(1)
+                    : (DateTime?)null,
                 ShippingAddress = Address.Create(),
             };
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Address
     {
@@ -21,12 +21,12 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             return new Address {
                 Id = Guid.NewGuid(),
-                ZipCode = Samples.RandomString(6, digits: true),
-                Country = Samples.RandomWord(),
-                State = Samples.RandomPhrase(2),
-                City = Samples.RandomWord(),
-                Street = Samples.RandomPhrase(3),
-                Building = Samples.RandomString(3, digits: true),
+                ZipCode = SampleBuilder.RandomString(6, digits: true),
+                Country = SampleBuilder.RandomWord(),
+                State = SampleBuilder.RandomPhrase(2),
+                City = SampleBuilder.RandomWord(),
+                Street = SampleBuilder.RandomPhrase(3),
+                Building = SampleBuilder.RandomString(3, digits: true),
             };
         }
 

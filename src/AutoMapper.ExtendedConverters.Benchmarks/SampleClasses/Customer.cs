@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Customer : Person
     {
@@ -15,11 +15,11 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             return new Customer {
                 Id = Guid.NewGuid(),
-                FirstName = Samples.RandomWord(),
-                LastName = Samples.RandomWord(),
-                Email = Samples.RandomPhrase(2),
-                Phones = Samples.RandomStringList(3, 12, digits: true),
-                Addresses = Samples.RandomList(2, Address.Create),
+                FirstName = SampleBuilder.RandomWord(),
+                LastName = SampleBuilder.RandomWord(),
+                Email = SampleBuilder.RandomPhrase(2),
+                Phones = SampleBuilder.RandomStringList(3, 12, digits: true),
+                Addresses = SampleBuilder.RandomList(2, Address.Create),
                 RegistrationDate = DateTime.Now,
             };
         }

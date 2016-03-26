@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class ProductCategory
     {
@@ -15,8 +15,8 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             var category = new ProductCategory {
                 Id = Guid.NewGuid(),
-                Name = Samples.RandomPhrase(5),
-                Products = Samples.RandomList(10, Product.Create)
+                Name = SampleBuilder.RandomPhrase(5),
+                Products = SampleBuilder.RandomList(10, Product.Create)
             };
             foreach (Product product in category.Products) {
                 product.ProductCategoryId = category.Id;

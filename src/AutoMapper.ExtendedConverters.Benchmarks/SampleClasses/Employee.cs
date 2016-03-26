@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Employee : Person
     {
@@ -17,12 +17,12 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             return new Employee {
                 Id = Guid.NewGuid(),
-                FirstName = Samples.RandomWord(),
-                LastName = Samples.RandomWord(),
-                Email = Samples.RandomPhrase(2),
-                Phones = Samples.RandomStringList(3, 12, digits: true),
+                FirstName = SampleBuilder.RandomWord(),
+                LastName = SampleBuilder.RandomWord(),
+                Email = SampleBuilder.RandomPhrase(2),
+                Phones = SampleBuilder.RandomStringList(3, 12, digits: true),
                 Address = Address.Create(),
-                Position = Samples.RandomPhrase(4),
+                Position = SampleBuilder.RandomPhrase(4),
             };
         }
 

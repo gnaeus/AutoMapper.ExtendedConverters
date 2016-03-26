@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Product
     {
@@ -23,13 +23,13 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             return new Product {
                 Id = Guid.NewGuid(),
-                Name = Samples.RandomPhrase(2),
-                ShortDescription = Samples.RandomPhrase(5),
-                Description = Samples.RandomPhrase(15),
-                Location = Samples.RandomPhrase(8),
-                Weight = 10 * (float)Samples.Random.NextDouble(),
-                Price = 100 * (decimal)Samples.Random.NextDouble(),
-                Count = Samples.Random.Next(100),
+                Name = SampleBuilder.RandomPhrase(2),
+                ShortDescription = SampleBuilder.RandomPhrase(5),
+                Description = SampleBuilder.RandomPhrase(15),
+                Location = SampleBuilder.RandomPhrase(8),
+                Weight = 10 * (float)SampleBuilder.Random.NextDouble(),
+                Price = 100 * (decimal)SampleBuilder.Random.NextDouble(),
+                Count = SampleBuilder.Random.Next(100),
             };
         }
 

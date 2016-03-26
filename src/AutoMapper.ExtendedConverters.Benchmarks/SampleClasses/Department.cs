@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks.SampleClasses
 {
     public class Department
     {
@@ -19,12 +19,12 @@ namespace AutoMapper.ExtendedConverters.SampleClasses
         {
             var department = new Department {
                 Id = Guid.NewGuid(),
-                Name = Samples.RandomPhrase(4),
-                Email = Samples.RandomPhrase(2),
-                Phones = Samples.RandomStringList(3, 12, digits: true),
+                Name = SampleBuilder.RandomPhrase(4),
+                Email = SampleBuilder.RandomPhrase(2),
+                Phones = SampleBuilder.RandomStringList(3, 12, digits: true),
                 Address = Address.Create(),
                 Director = Employee.Create(),
-                Salesmans = Samples.RandomList(10, Employee.Create),
+                Salesmans = SampleBuilder.RandomList(10, Employee.Create),
             };
             department.Director.DepartmentId = department.Id;
             foreach (Employee salesman in department.Salesmans) {

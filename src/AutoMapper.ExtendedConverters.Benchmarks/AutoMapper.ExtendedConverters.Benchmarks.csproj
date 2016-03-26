@@ -65,15 +65,20 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleBuilder.cs" />
+    <Compile Include="SampleClasses\Address.cs" />
+    <Compile Include="SampleClasses\Customer.cs" />
+    <Compile Include="SampleClasses\Department.cs" />
+    <Compile Include="SampleClasses\Employee.cs" />
+    <Compile Include="SampleClasses\Order.cs" />
+    <Compile Include="SampleClasses\Person.cs" />
+    <Compile Include="SampleClasses\Product.cs" />
+    <Compile Include="SampleClasses\ProductCategory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoMapper.ExtendedConverters.SampleClasses\AutoMapper.ExtendedConverters.SampleClasses.csproj">
-      <Project>{4cc3759b-c960-44b9-8394-a71b75c8712d}</Project>
-      <Name>AutoMapper.ExtendedConverters.SampleClasses</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AutoMapper.ExtendedConverters\AutoMapper.ExtendedConverters.csproj">
       <Project>{8754f86b-0490-476b-97d3-1545f7938796}</Project>
       <Name>AutoMapper.ExtendedConverters</Name>

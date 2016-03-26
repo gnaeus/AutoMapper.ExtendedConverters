@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoMapper.ExtendedConverters.SampleClasses
+namespace AutoMapper.ExtendedConverters.Benchmarks
 {
-    public static class Samples
+    using SampleClasses;
+
+    public static class SampleBuilder
     {
         #region Random
 
