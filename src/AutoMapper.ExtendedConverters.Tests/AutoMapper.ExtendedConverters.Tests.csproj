@@ -65,10 +65,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoMapper.ExtendedConverters.SampleClasses\AutoMapper.ExtendedConverters.SampleClasses.csproj">
-      <Project>{4cc3759b-c960-44b9-8394-a71b75c8712d}</Project>
-      <Name>AutoMapper.ExtendedConverters.SampleClasses</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AutoMapper.ExtendedConverters\AutoMapper.ExtendedConverters.csproj">
       <Project>{8754f86b-0490-476b-97d3-1545f7938796}</Project>
       <Name>AutoMapper.ExtendedConverters</Name>
