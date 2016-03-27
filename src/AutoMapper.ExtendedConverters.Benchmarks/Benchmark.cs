@@ -7,11 +7,12 @@ namespace AutoMapper.ExtendedConverters.Benchmarks
 
     public class Benchmark
     {
-        public static readonly object Data = SampleBuilder.DepartmentsAggregate();
+        public static readonly object Data = SampleBuilder.DepartmentAggregate();
 
         private readonly IMapper AutoMapper;
         private readonly IMapper AutoMapperCompiledConverter;
         private readonly IMapper AutoMapperCompiledAndListConverter;
+        private readonly ManualMapper ManualMapper;
 
         public Benchmark()
         {
@@ -62,56 +63,51 @@ namespace AutoMapper.ExtendedConverters.Benchmarks
             });
             config.AssertConfigurationIsValid();
             AutoMapperCompiledAndListConverter = config.CreateMapper();
+
+            ManualMapper = new ManualMapper();
         }
 
         [Benchmark(Description = "Building sample data")]
         public object BuildSampleDataTest()
         {
-            return SampleBuilder.DepartmentsAggregate();
+            return SampleBuilder.DepartmentAggregate();
+        }
+
+        [Benchmark(Description = "Manual Mapping")]
+        public object ManualMapperTest()
+        {
+            return ManualMapper.Map((Department)Data);
         }
 
         [Benchmark(Description = "Vanilla AutoMapper")]
         public object AutoMapperTest()
         {
-            return AutoMapper.Map<List<Department>>(Data);
+            return AutoMapper.Map<Department>(Data);
         }
 
         [Benchmark(Description = "AutoMapper + CompiledConverter")]
         public object AutoMapperCompiledConverterTest()
         {
-            return AutoMapperCompiledConverter.Map<List<Department>>(Data);
+            return AutoMapperCompiledConverter.Map<Department>(Data);
         }
 
         [Benchmark(Description = "AutoMapper + CompiledConverter + ListConverter")]
         public object AutoMapperCompiledAndListConverterTest()
         {
-            return AutoMapperCompiledAndListConverter.Map<List<Department>>(Data);
+            return AutoMapperCompiledAndListConverter.Map<Department>(Data);
         }
 
         [Benchmark(Description = "Serialization of sample data by Json.NET")]
-        public object NewtonsoftJsonSerializationTest()
+        public string NewtonsoftJsonSerializationTest()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(Data);
         }
-
-        [Benchmark(Description = "Serialization of sample data by Jil serializer")]
-        public object JilSerializationTest()
-        {
-            return Jil.JSON.Serialize(Data);
-        }
-
+        
         [Benchmark(Description = "Serialization and deserialization of sample data by Json.NET")]
         public object NewtonsoftJsonCloningTest()
         {
             string serialized = Newtonsoft.Json.JsonConvert.SerializeObject(Data);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Department>>(serialized);
-        }
-
-        [Benchmark(Description = "Serialization and deserialization of sample data by Jil serializer")]
-        public object JilCloningTest()
-        {
-            string serialized = Jil.JSON.Serialize(Data);
-            return Jil.JSON.Deserialize<List<Department>>(serialized);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Department>(serialized);
         }
     }
 }

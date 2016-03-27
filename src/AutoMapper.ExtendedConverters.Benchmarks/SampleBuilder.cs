@@ -60,13 +60,12 @@ namespace AutoMapper.ExtendedConverters.Benchmarks
 
         #region Aggregates
 
-        public static List<Department> DepartmentsAggregate()
+        public static Department DepartmentAggregate()
         {
-            List<Department> departments = RandomList(5, Department.Create);
-            List<Order> orders = RandomList(100, Order.Create);
+            Department department = Department.Create();
+            List<Order> orders = RandomList(300, Order.Create);
 
             foreach (Order order in orders) {
-                Department department = departments.Choice();
                 Employee employee = department.Salesmans.Choice();
                 employee.Orders = employee.Orders ?? new List<Order>();
                 employee.Orders.Add(order);
@@ -79,7 +78,7 @@ namespace AutoMapper.ExtendedConverters.Benchmarks
                 order.Product = product;
             }
 
-            return departments;
+            return department;
         }
 
         #endregion
