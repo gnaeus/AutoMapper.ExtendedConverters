@@ -1,6 +1,14 @@
 # AutoMapper.ExtendedConverters
 AutoMapper.ExtendedConverters is a small set of useful AutoMapper custom Type Converters
 
+__ListConverter__ and more general __CollectionConverter__ are usefull for updating data in existing collections.
+
+For example, we have list of entites from database and it's modified version from client.
+Then with `ListConverter` we can update all database entities from client objects with same `Id`.
+
+__CompiledConverter__ is more performant version of default AutoMapper converter for plain objects.
+It uses compiled Expressions behind the scenes. But it not supports custom conversion for specific properties.
+
 ```cs
 using System.Diagnostics;
 using System.Linq;
