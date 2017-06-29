@@ -71,10 +71,13 @@ class Program
 }
 ```
 
-## Mapping collections other than `List<T>`
+### Mapping collections other than `List<T>`
 ```cs
-        cfg.CreateMap<IEnumerable<Model>, ICollection<Entity>>()
-            .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
+var config = new MapperConfiguration(cfg =>
+{
+    cfg.CreateMap<IEnumerable<Model>, ICollection<Entity>>()
+        .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
+});   
 ```
 
 ## Using with [Mapster](https://github.com/eswann/Mapster)
