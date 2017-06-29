@@ -9,14 +9,15 @@ namespace AutoMapper.ExtendedConverters
         where TSrc : class
         where TDest : class, new()
     {
-        public TDest Convert(ResolutionContext context)
+        public TDest Convert(TSrc src, TDest dest, ResolutionContext context)
         {
-            var src = (TSrc)context.SourceValue;
             if (src == null) {
                 return null;
             }
-            var dest = (TDest)context.DestinationValue ?? new TDest();
-            MapProps(context.Engine.Mapper, src, dest);
+            if (dest == null) {
+                dest = new TDest();
+            }
+            MapProps(context.Mapper, src, dest);
             return dest;
         }
 

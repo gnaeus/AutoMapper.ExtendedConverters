@@ -15,16 +15,14 @@ namespace AutoMapper.ExtendedConverters
             DestKey = destKey;
         }
 
-        public List<TDest> Convert(ResolutionContext context)
+        public List<TDest> Convert(
+            List<TSrc> srcList, List<TDest> destList, ResolutionContext context)
         {
-            var srcList = (List<TSrc>)context.SourceValue;
-            var destList = (List<TDest>)context.DestinationValue;
-
             if (srcList == null) {
                 return null;
             }
 
-            IMapper mapper = context.Engine.Mapper;
+            IMapper mapper = context.Mapper;
 
             var result = new List<TDest>(srcList.Count);
             

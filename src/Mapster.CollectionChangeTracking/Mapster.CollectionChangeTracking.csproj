@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mapster, Version=2.6.1.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mapster.2.6.1\lib\net45\Mapster.dll</HintPath>
+    <Reference Include="Mapster, Version=3.1.1.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mapster.3.1.1\lib\net45\Mapster.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

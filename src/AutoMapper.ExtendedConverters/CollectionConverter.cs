@@ -18,16 +18,14 @@ namespace AutoMapper.ExtendedConverters
             DestKey = destKey;
         }
 
-        public TDestCollection Convert(ResolutionContext context)
+        public TDestCollection Convert(
+            TSrcCollection srcCollection, TDestCollection destCollection, ResolutionContext context)
         {
-            var srcCollection = (TSrcCollection)context.SourceValue;
-            var destCollection = (TDestCollection)context.DestinationValue;
-
             if (srcCollection == null) {
                 return null;
             }
 
-            IMapper mapper = context.Engine.Mapper;
+            IMapper mapper = context.Mapper;
 
             TDestCollection result;
 
