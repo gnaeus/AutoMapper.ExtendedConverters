@@ -26,7 +26,7 @@ namespace AutoMapper.ExtendedConverters
             Func<TSrc, TKey> srcKey,
             Func<TDest, TKey> destKey)
             where TSrcCollection : class, IEnumerable<TSrc>
-            where TDestCollection : class, ICollection<TDest>, new()
+            where TDestCollection : class, ICollection<TDest>
         {
             mapping.ConvertUsing(new CollectionConverter<TSrcCollection, TDestCollection, TSrc, TDest, TKey>(srcKey, destKey));
         }

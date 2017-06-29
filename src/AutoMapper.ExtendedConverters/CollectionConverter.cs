@@ -7,7 +7,7 @@ namespace AutoMapper.ExtendedConverters
     public class CollectionConverter<TSrcCollection, TDestCollection, TSrc, TDest, TKey>
         : ITypeConverter<TSrcCollection, TDestCollection>
         where TSrcCollection : class, IEnumerable<TSrc>
-        where TDestCollection : class, ICollection<TDest>, new()
+        where TDestCollection : class, ICollection<TDest>
     {
         protected readonly Func<TSrc, TKey> SrcKey;
         protected readonly Func<TDest, TKey> DestKey;
@@ -29,13 +29,19 @@ namespace AutoMapper.ExtendedConverters
 
             IMapper mapper = context.Engine.Mapper;
 
-            var result = new TDestCollection();
+            TDestCollection result;
 
             if (destCollection == null) {
+                result = typeof(TDestCollection) == typeof(ICollection<TDest>)
+                    ? (TDestCollection)(object)new List<TDest>()
+                    : Activator.CreateInstance<TDestCollection>();
+
                 foreach (TSrc src in srcCollection) {
                     result.Add(mapper.Map<TSrc, TDest>(src));
                 }
                 return result;
+            } else {
+                result = (TDestCollection)Activator.CreateInstance(destCollection.GetType());
             }
 
             ILookup<TKey, TDest> destLookup = destCollection.ToLookup(DestKey);

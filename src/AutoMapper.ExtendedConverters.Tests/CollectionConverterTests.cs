@@ -8,13 +8,13 @@ namespace AutoMapper.ExtendedConverters.Tests
     [TestClass]
     public class CollectionConverterTests
     {
-        class Model
+        public class Model
         {
             public int Id { get; set; }
             public string Text { get; set; }
         }
 
-        class Entity : IComparable<Entity>
+        public class Entity : IComparable<Entity>
         {
             public int Id { get; set; }
             public string Text { get; set; }
@@ -33,10 +33,12 @@ namespace AutoMapper.ExtendedConverters.Tests
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Model, Entity>();
 
+                cfg.CreateMap<ModelWrapper, EntityWrapper>();
+
                 cfg.CreateMap<Model[], SortedSet<Entity>>()
                     .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
-
-                cfg.CreateMap<IEnumerable<Model>, LinkedList<Entity>>()
+                
+                cfg.CreateMap<IEnumerable<Model>, ICollection<Entity>>()
                     .UsingCollectionConverter((Model m) => m.Id, (Entity e) => e.Id);
             });
 
@@ -136,10 +138,20 @@ namespace AutoMapper.ExtendedConverters.Tests
             yield return new Model { Id = 5, Text = "E" };
         }
 
+        public class ModelWrapper
+        {
+            public IEnumerable<Model> Collection { get; set; }
+        }
+
+        public class EntityWrapper
+        {
+            public ICollection<Entity> Collection { get; set; }
+        }
+
         [TestMethod]
         public void ShouldMapAnyIEnumerable_ToAnyICollection()
         {
-            ICollection<Entity> dest = new LinkedList<Entity>(new[] {
+            var dest = new LinkedList<Entity>(new[] {
                 new Entity { Id = 1, Text = "a" },
                 new Entity { Id = 2, Text = "b" },
                 new Entity { Id = 3, Text = "c" },
@@ -148,11 +160,16 @@ namespace AutoMapper.ExtendedConverters.Tests
             var destArray = new Entity[3];
             dest.CopyTo(destArray, 0);
 
-            ICollection<Entity> res = Mapper.Map(BuildSource(), dest);
+            var destWrapper = new EntityWrapper { Collection = dest };
+            var srcWrapper = new ModelWrapper { Collection = BuildSource() };
+
+            var res = Mapper.Map(srcWrapper, destWrapper);
 
             var resArray = new Entity[4];
-            res.CopyTo(resArray, 0);
+            res.Collection.CopyTo(resArray, 0);
 
+            // should preserve collection type
+            Assert.AreEqual(dest.GetType(), res.Collection.GetType());
             // should preserve objects with keys both in source and destination
             Assert.AreSame(destArray[0], resArray[0]);
             Assert.AreSame(destArray[1], resArray[1]);
@@ -164,8 +181,8 @@ namespace AutoMapper.ExtendedConverters.Tests
             Assert.AreNotSame(destArray[2], resArray[3]);
 
             // should map values of collection items
-            Assert.IsTrue(BuildSource().Select(m => m.Id).SequenceEqual(res.Select(e => e.Id)));
-            Assert.IsTrue(BuildSource().Select(m => m.Text).SequenceEqual(res.Select(e => e.Text)));
+            Assert.IsTrue(BuildSource().Select(m => m.Id).SequenceEqual(res.Collection.Select(e => e.Id)));
+            Assert.IsTrue(BuildSource().Select(m => m.Text).SequenceEqual(res.Collection.Select(e => e.Text)));
         }
     }
 }

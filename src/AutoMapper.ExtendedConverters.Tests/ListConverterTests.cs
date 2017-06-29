@@ -7,13 +7,13 @@ namespace AutoMapper.ExtendedConverters.Tests
     [TestClass]
     public class ListConverterTests
     {
-        class Model
+        public class Model
         {
             public int Id { get; set; }
             public string Text { get; set; }
         }
 
-        class Entity
+        public class Entity
         {
             public int Id { get; set; }
             public string Text { get; set; }
@@ -34,7 +34,7 @@ namespace AutoMapper.ExtendedConverters.Tests
 
             Mapper = config.CreateMapper();
         }
-
+        
         [TestMethod]
         public void ShouldMapNullSource_WithoutDestination()
         {
